@@ -1,13 +1,12 @@
-﻿using ShopsRUs.Domain.Concrete.Base;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ShopsRUs.Domain.Concrete
+namespace ShopsRUs.Core.Dtos
 {
-    public class Customer : Entity
+    public class CustomerListDto
     {
         public string Name { get; set; }
         public string Surname { get; set; }
