@@ -11,8 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ShopsRUs.Core\ShopsRUs.Core.csproj" />
     <ProjectReference Include="..\ShopsRUs.Domain\ShopsRUs.Domain.csproj" />
+    <ProjectReference Include="..\ShopsRUs.Repository\ShopsRUs.Repository.csproj" />
   </ItemGroup>
 
 </Project>

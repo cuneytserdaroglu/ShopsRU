@@ -1,4 +1,5 @@
-﻿using ShopsRUs.Domain.Concrete;
+﻿using ShopsRUs.Core.Dtos;
+using ShopsRUs.Domain.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace ShopsRUs.Core.Repository.EntityFramework
 {
-    public interface ICustomerRepository : IGenericRepository<Customer>
+    public interface IDiscountRepository : IGenericRepository<Discount>
     {
-        Task<Customer> GetByIdIncludeCustomerType(int customerId);
+        
     }
 }

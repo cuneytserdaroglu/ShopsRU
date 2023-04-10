@@ -16,6 +16,7 @@ namespace ShopsRUs.Repository.Repositories.EntityFramework.UoW
         {
             _context = context;
             CustomerRepository = new CustomerRepository(context);
+            DiscountRepository= new DiscountRepository(context);
         }
         public void Commit()
         {
@@ -30,6 +31,8 @@ namespace ShopsRUs.Repository.Repositories.EntityFramework.UoW
 
         #region Db
         public ICustomerRepository CustomerRepository { get; }
+
+        public IDiscountRepository DiscountRepository { get; }
 
 
 

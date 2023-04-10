@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShopsRUs.Repository.Repositories.EntityFramework;
 
@@ -11,9 +12,10 @@ using ShopsRUs.Repository.Repositories.EntityFramework;
 namespace ShopsRUs.Repository.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230410230440_Inital3")]
+    partial class Inital3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -67,8 +69,9 @@ namespace ShopsRUs.Repository.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnOrder(3);
 
-                    b.Property<int>("DiscountId")
-                        .HasColumnType("int");
+                    b.Property<string>("DiscountRate")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit")
@@ -80,8 +83,6 @@ namespace ShopsRUs.Repository.Migrations
                         .HasColumnType("nvarchar(200)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("DiscountId");
 
                     b.ToTable("CustomerTypes", (string)null);
                 });
@@ -99,6 +100,9 @@ namespace ShopsRUs.Repository.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnOrder(3);
 
+                    b.Property<int>("CustomerTypeId")
+                        .HasColumnType("int");
+
                     b.Property<int>("DiscountRate")
                         .HasColumnType("int");
 
@@ -107,6 +111,8 @@ namespace ShopsRUs.Repository.Migrations
                         .HasColumnOrder(2);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CustomerTypeId");
 
                     b.ToTable("Discounts");
                 });
@@ -122,15 +128,15 @@ namespace ShopsRUs.Repository.Migrations
                     b.Navigation("CustomerType");
                 });
 
-            modelBuilder.Entity("ShopsRUs.Domain.Concrete.CustomerType", b =>
+            modelBuilder.Entity("ShopsRUs.Domain.Concrete.Discount", b =>
                 {
-                    b.HasOne("ShopsRUs.Domain.Concrete.Discount", "Discount")
+                    b.HasOne("ShopsRUs.Domain.Concrete.CustomerType", "CustomerType")
                         .WithMany()
-                        .HasForeignKey("DiscountId")
+                        .HasForeignKey("CustomerTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Discount");
+                    b.Navigation("CustomerType");
                 });
 #pragma warning restore 612, 618
         }

@@ -12,5 +12,7 @@ namespace ShopsRUs.Core.UoW
         Task CommitAsync();
         void Commit();
         ICustomerRepository CustomerRepository { get; }
+        IDiscountRepository DiscountRepository { get; }
+        
     }
 }

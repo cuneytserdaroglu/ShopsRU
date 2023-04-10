@@ -1,10 +1,6 @@
-﻿using ShopsRUs.Core.Repository.EntityFramework;
+﻿using Microsoft.EntityFrameworkCore;
+using ShopsRUs.Core.Repository.EntityFramework;
 using ShopsRUs.Domain.Concrete;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ShopsRUs.Repository.Repositories.EntityFramework
 {
@@ -13,7 +9,10 @@ namespace ShopsRUs.Repository.Repositories.EntityFramework
         public CustomerRepository(AppDbContext context) : base(context)
         {
         }
-
+        public async Task<Customer> GetByIdIncludeCustomerType(int customerId)
+        {
+          return  await _context.Customers.Include(x => x.CustomerType).Where(x => x.Id == customerId).FirstOrDefaultAsync(); 
+        }
 
     }
 }
