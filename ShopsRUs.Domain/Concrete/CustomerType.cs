@@ -10,8 +10,8 @@ namespace ShopsRUs.Domain.Concrete
     public class CustomerType : Entity
     {
         public string Name { get; set; }
-        public int DiscountId { get; set; }
-        public Discount Discount { get; set; }
+        public List<Customer> Customers { get; set; }
+
     }
 
 }

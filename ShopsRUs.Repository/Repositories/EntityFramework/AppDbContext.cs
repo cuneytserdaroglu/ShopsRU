@@ -16,6 +16,7 @@ namespace ShopsRUs.Repository.Repositories.EntityFramework
         public DbSet<Customer> Customers { get; set; }
         public DbSet<CustomerType> CustomerTypes { get; set; }
         public DbSet<Discount> Discounts { get; set; }
+        public DbSet<Invoice> Invoices { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -35,7 +35,7 @@ namespace ShopsRUs.Service.BusinessRules.Discount
 
             if (customer.CustomerTypeId == (int)CustomerTypes.Employee)
             {
-                return new Dictionary<bool, int>() { { true, customer.CustomerType.Discount.DiscountRate } };
+                return new Dictionary<bool, int>() { { true, customer.Discount.DiscountRate } };
             }
             else
             {
@@ -52,9 +52,9 @@ namespace ShopsRUs.Service.BusinessRules.Discount
             if ( customer.CustomerTypeId == (int)CustomerTypes.Member)
             {
                 if (customer.CreatedDate < DateTime.Now.AddYears(-2)) //2 yıldan beri müşteriyse %5 indirim alır
-                    return new Dictionary<bool, int>() { { true, customer.CustomerType.Discount.DiscountRate / 2 } };
+                    return new Dictionary<bool, int>() { { true, customer.Discount.DiscountRate / 2 } };
                 else
-                    return new Dictionary<bool, int>() { { true, customer.CustomerType.Discount.DiscountRate} };
+                    return new Dictionary<bool, int>() { { true, customer.Discount.DiscountRate} };
             }
             else
             {

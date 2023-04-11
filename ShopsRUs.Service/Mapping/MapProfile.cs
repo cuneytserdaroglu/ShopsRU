@@ -9,6 +9,7 @@ namespace ShopsRUs.Service.Mapping
         public MapProfile()
         {
             CreateMap<Customer, CustomerListDto>().ReverseMap();
+            CreateMap<Invoice, InvoiceDto>().ReverseMap();
         }
     }
 }

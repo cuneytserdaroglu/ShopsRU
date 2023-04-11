@@ -10,5 +10,6 @@ namespace ShopsRUs.Core
     {
         public const string DEFAULT_SCHEMA = "ordering";
         public const string NotFoundCustomer = "Müşteri Bulunamadı";
+        public const decimal DiscountAmount = 5;
     }
 }

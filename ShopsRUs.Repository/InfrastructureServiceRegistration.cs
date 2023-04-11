@@ -25,6 +25,7 @@ namespace ShopsRUs.Repository
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<IDiscountRepository, DiscountRepository>();
+            services.AddScoped<IInvoiceRepository, InvoiceRepository>();
 
             return services;
         }

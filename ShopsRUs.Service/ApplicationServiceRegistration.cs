@@ -15,8 +15,11 @@ namespace ShopsRUs.Service
         {
             services.AddAutoMapper(typeof(MapProfile));
             services.AddScoped<ICustomerService, CustomerService>();
+            services.AddScoped<IDiscountService, DiscountService>();
+            services.AddScoped<IInvoiceService, InvoiceService>();
             services.AddScoped(typeof(IService<>), typeof(Service<>));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+          
             services.AddSubClassesOfType(Assembly.GetExecutingAssembly(), typeof(BaseBusinessRules));
             return services;
         }

@@ -8,11 +8,9 @@ using System.Threading.Tasks;
 
 namespace ShopsRUs.Core.Services
 {
-    public interface IDiscountService : IService<Discount>
+    public interface IInvoiceService : IService<Invoice>
     {
-        Task<CustomResponseDto<int>> CheckCustomer(int customerId);
-        CustomResponseDto<decimal> DiscountForBill(decimal price);
-
-
+        Task<CustomResponseDto<InvoiceDto>> Calculate(int customerId, decimal amount);
+        Task SaveInvoice(CustomResponseDto<InvoiceDto> dto);
     }
 }

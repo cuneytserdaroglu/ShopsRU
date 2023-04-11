@@ -11,7 +11,7 @@ namespace ShopsRUs.Repository.Repositories.EntityFramework
         }
         public async Task<Customer> GetByIdIncludeCustomerType(int customerId)
         {
-          return  await _context.Customers.Include(x => x.CustomerType).Where(x => x.Id == customerId).FirstOrDefaultAsync(); 
+          return  await _context.Customers.Include(x => x.CustomerType).Include(x => x.Discount).Where(x => x.Id == customerId).FirstOrDefaultAsync(); 
         }
 
     }

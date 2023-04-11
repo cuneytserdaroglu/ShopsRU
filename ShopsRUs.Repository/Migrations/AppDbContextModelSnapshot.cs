@@ -38,6 +38,9 @@ namespace ShopsRUs.Repository.Migrations
                     b.Property<int>("CustomerTypeId")
                         .HasColumnType("int");
 
+                    b.Property<int>("DiscountId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit")
                         .HasColumnOrder(2);
@@ -50,6 +53,8 @@ namespace ShopsRUs.Repository.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CustomerTypeId");
+
+                    b.HasIndex("DiscountId");
 
                     b.ToTable("Customers", (string)null);
                 });
@@ -67,9 +72,6 @@ namespace ShopsRUs.Repository.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnOrder(3);
 
-                    b.Property<int>("DiscountId")
-                        .HasColumnType("int");
-
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit")
                         .HasColumnOrder(2);
@@ -80,8 +82,6 @@ namespace ShopsRUs.Repository.Migrations
                         .HasColumnType("nvarchar(200)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("DiscountId");
 
                     b.ToTable("CustomerTypes", (string)null);
                 });
@@ -111,26 +111,65 @@ namespace ShopsRUs.Repository.Migrations
                     b.ToTable("Discounts");
                 });
 
+            modelBuilder.Entity("ShopsRUs.Domain.Concrete.Invoice", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnOrder(1);
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnOrder(3);
+
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("DiscountForBill")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("DiscountRate")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit")
+                        .HasColumnOrder(2);
+
+                    b.Property<decimal>("LastAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Invoices");
+                });
+
             modelBuilder.Entity("ShopsRUs.Domain.Concrete.Customer", b =>
                 {
                     b.HasOne("ShopsRUs.Domain.Concrete.CustomerType", "CustomerType")
-                        .WithMany()
+                        .WithMany("Customers")
                         .HasForeignKey("CustomerTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("CustomerType");
-                });
-
-            modelBuilder.Entity("ShopsRUs.Domain.Concrete.CustomerType", b =>
-                {
                     b.HasOne("ShopsRUs.Domain.Concrete.Discount", "Discount")
                         .WithMany()
                         .HasForeignKey("DiscountId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("CustomerType");
+
                     b.Navigation("Discount");
+                });
+
+            modelBuilder.Entity("ShopsRUs.Domain.Concrete.CustomerType", b =>
+                {
+                    b.Navigation("Customers");
                 });
 #pragma warning restore 612, 618
         }

@@ -16,67 +16,69 @@ namespace ShopsRUs.Repository.Repositories.EntityFramework
 
             if (!context.Customers.Any())
             {
-                context.Discounts.Add(new Discount
+                Discount discount = new Discount()
+                {
+                     CreatedDate= DateTime.Now,
+                      IsActive= true,
+                       DiscountRate=30
+                }; 
+                Discount discount2 = new Discount()
                 {
                     CreatedDate = DateTime.Now,
-                    DiscountRate = 30,
                     IsActive = true,
-                });
-                context.Discounts.Add(new Discount
+                    DiscountRate = 10
+                };
+                CustomerType customerType = new CustomerType()
                 {
+                    IsActive = true,
                     CreatedDate = DateTime.Now,
-                    DiscountRate = 10,
+                    Name = "Mağaza Çalışanı"
+                };
+                CustomerType customerType2 = new CustomerType()
+                {
                     IsActive = true,
+                    CreatedDate = DateTime.Now,
+                    Name = "Üye-Müşteri"
+                };
+                context.Customers.Add(new Customer
+                {
+                    IsActive = true,
+                    CreatedDate = DateTime.Now,
+                    Name = "Ceyda",
+                    //CustomerTypeId = (int)CustomerTypes.Employee,
+                    //DiscountId =1,
+                    CustomerType = customerType,
+                    Discount = discount
                 });
-                context.SaveChanges();
-                using(var context1 = new AppDbContext())
+                context.Customers.Add(new Customer
                 {
-                    context.CustomerTypes.Add(new CustomerType
-                    {
-                        Name = "Mağaza Çalışanı",
-                        IsActive = true,
-                        CreatedDate = DateTime.Now,
-                        DiscountId = 1,
-                    });
-                    context.CustomerTypes.Add(new CustomerType
-                    {
-                        Name = "Müşteri - Üye",
-                        IsActive = true,
-                        CreatedDate = DateTime.Now,
-                        DiscountId = 2
-                    });
-                    context1.SaveChanges();
-                }
-                using (var context2 = new AppDbContext())
+                    IsActive = true,
+                    CreatedDate = DateTime.Now,
+                    Name = "Cüneyt",
+                    //CustomerTypeId = (int)CustomerTypes.Member,
+                    //DiscountId = 2,
+                    CustomerType = customerType2,
+                    Discount = discount2
+                    
+                });
+                context.Customers.Add(new Customer
                 {
-                    context.Customers.Add(new Customer
-                    {
-                        IsActive = true,
-                        CreatedDate = DateTime.Now,
-                        Name = "Cüneyt",
-                        CustomerTypeId = (int)CustomerTypes.Employee,
-                    });
-                    context.Customers.Add(new Customer
-                    {
-                        IsActive = true,
-                        CreatedDate = DateTime.Now.AddYears(-3),
-                        Name = "Miray",
-                        CustomerTypeId = (int)CustomerTypes.Member,
-                    });
-                    context.Customers.Add(new Customer
-                    {
-                        IsActive = true,
-                        CreatedDate = DateTime.Now,
-                        Name = "Ceyda",
-                        CustomerTypeId = (int)CustomerTypes.Member,
-                    });
-                    context2.SaveChanges();
-                }
+                    IsActive = true,
+                    CreatedDate = DateTime.Now.AddYears(-3),
+                    Name = "Miray",
+                    //CustomerTypeId = (int)CustomerTypes.Member,
+                    //DiscountId = 2
+                     CustomerType= customerType2,
+                      Discount = discount2
+                });
 
-                return;   
+
+
+                context.SaveChanges();
+                return;
             }
 
-
+            context.SaveChanges();
         }
     }
 }

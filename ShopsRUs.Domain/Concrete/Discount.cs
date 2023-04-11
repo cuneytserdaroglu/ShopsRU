@@ -10,6 +10,6 @@ namespace ShopsRUs.Domain.Concrete
     public class Discount :Entity
     {
         public int DiscountRate { get; set; }
-      
+
     }
 }

@@ -12,8 +12,8 @@ using ShopsRUs.Repository.Repositories.EntityFramework;
 namespace ShopsRUs.Repository.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230410230440_Inital3")]
-    partial class Inital3
+    [Migration("20230411095355_t29")]
+    partial class t29
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -40,6 +40,9 @@ namespace ShopsRUs.Repository.Migrations
                     b.Property<int>("CustomerTypeId")
                         .HasColumnType("int");
 
+                    b.Property<int>("DiscountId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit")
                         .HasColumnOrder(2);
@@ -52,6 +55,8 @@ namespace ShopsRUs.Repository.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CustomerTypeId");
+
+                    b.HasIndex("DiscountId");
 
                     b.ToTable("Customers", (string)null);
                 });
@@ -68,10 +73,6 @@ namespace ShopsRUs.Repository.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2")
                         .HasColumnOrder(3);
-
-                    b.Property<string>("DiscountRate")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit")
@@ -100,9 +101,6 @@ namespace ShopsRUs.Repository.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnOrder(3);
 
-                    b.Property<int>("CustomerTypeId")
-                        .HasColumnType("int");
-
                     b.Property<int>("DiscountRate")
                         .HasColumnType("int");
 
@@ -112,31 +110,31 @@ namespace ShopsRUs.Repository.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CustomerTypeId");
-
                     b.ToTable("Discounts");
                 });
 
             modelBuilder.Entity("ShopsRUs.Domain.Concrete.Customer", b =>
                 {
                     b.HasOne("ShopsRUs.Domain.Concrete.CustomerType", "CustomerType")
-                        .WithMany()
+                        .WithMany("Customers")
                         .HasForeignKey("CustomerTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("ShopsRUs.Domain.Concrete.Discount", "Discount")
+                        .WithMany()
+                        .HasForeignKey("DiscountId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("CustomerType");
+
+                    b.Navigation("Discount");
                 });
 
-            modelBuilder.Entity("ShopsRUs.Domain.Concrete.Discount", b =>
+            modelBuilder.Entity("ShopsRUs.Domain.Concrete.CustomerType", b =>
                 {
-                    b.HasOne("ShopsRUs.Domain.Concrete.CustomerType", "CustomerType")
-                        .WithMany()
-                        .HasForeignKey("CustomerTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("CustomerType");
+                    b.Navigation("Customers");
                 });
 #pragma warning restore 612, 618
         }
