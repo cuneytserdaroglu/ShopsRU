@@ -24,6 +24,8 @@ namespace ShopsRUs.Service.Services
 
         public async Task<CustomResponseDto<int>> CheckCustomer(int customerId)
         {
+            var a = 0;
+            var b = 10 / a;
             var customer = await ofWork.CustomerRepository.GetByIdIncludeCustomerType(customerId);
             if (customer == null)
               return CustomResponseDto<int>.Fail(404,GlobalConst.NotFoundCustomer);
