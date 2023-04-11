@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using ShopsRUs.Core.Repository;
 using ShopsRUs.Core.Repository.EntityFramework;
 using ShopsRUs.Repository.Repositories.EntityFramework;
+using ShopsRUs.Repository.Repositories.EntityFramework.Context;
 using System;
 using System.Collections.Generic;
 using System.Linq;

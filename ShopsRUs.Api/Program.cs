@@ -1,16 +1,8 @@
-﻿using Microsoft.AspNetCore.Authentication;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Serilog;
+﻿using Serilog;
 using ShopsRUs.Core.Exceptions;
-using ShopsRUs.Core.Services;
-using ShopsRUs.Core.UoW;
 using ShopsRUs.Repository;
-using ShopsRUs.Repository.Repositories.EntityFramework;
-using ShopsRUs.Repository.Repositories.EntityFramework.UoW;
+using ShopsRUs.Repository.Repositories.EntityFramework.Context;
 using ShopsRUs.Service;
-using ShopsRUs.Service.Services;
-using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,12 +19,14 @@ builder.Services.AddApplicationServices();
 
 builder.Host.UseSerilog((ctx, lc) => lc
     .WriteTo.Console()
-    .WriteTo.Seq("http://localhost:5341")
+    .WriteTo.Seq(builder.Configuration["Seq"])
     .MinimumLevel.Information()   //Default da information geliyor. Minimum bu logları al
     .Enrich.FromLogContext()
     .ReadFrom.Configuration(ctx.Configuration)
-    .Enrich.WithProperty("AppDbContext", ctx.HostingEnvironment.ApplicationName)   
+    .Enrich.WithProperty("AppDbContext", ctx.HostingEnvironment.ApplicationName)
     );
+
+
 
 var app = builder.Build();
 app.ConfigureCustomExceptionMiddleware();

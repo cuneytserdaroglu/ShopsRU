@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ShopsRUs.Core.Repository;
+using ShopsRUs.Repository.Repositories.EntityFramework.Context;
 using System.Linq.Expressions;
 
 namespace ShopsRUs.Repository.Repositories.EntityFramework

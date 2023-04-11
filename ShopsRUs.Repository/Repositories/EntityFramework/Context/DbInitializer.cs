@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ShopsRUs.Repository.Repositories.EntityFramework
+namespace ShopsRUs.Repository.Repositories.EntityFramework.Context
 {
     public static class DbInitializer
     {
@@ -18,10 +18,10 @@ namespace ShopsRUs.Repository.Repositories.EntityFramework
             {
                 Discount discount = new Discount()
                 {
-                     CreatedDate= DateTime.Now,
-                      IsActive= true,
-                       DiscountRate=30
-                }; 
+                    CreatedDate = DateTime.Now,
+                    IsActive = true,
+                    DiscountRate = 30
+                };
                 Discount discount2 = new Discount()
                 {
                     CreatedDate = DateTime.Now,
@@ -59,7 +59,7 @@ namespace ShopsRUs.Repository.Repositories.EntityFramework
                     //DiscountId = 2,
                     CustomerType = customerType2,
                     Discount = discount2
-                    
+
                 });
                 context.Customers.Add(new Customer
                 {
@@ -68,8 +68,8 @@ namespace ShopsRUs.Repository.Repositories.EntityFramework
                     Name = "Miray",
                     //CustomerTypeId = (int)CustomerTypes.Member,
                     //DiscountId = 2
-                     CustomerType= customerType2,
-                      Discount = discount2
+                    CustomerType = customerType2,
+                    Discount = discount2
                 });
 
 

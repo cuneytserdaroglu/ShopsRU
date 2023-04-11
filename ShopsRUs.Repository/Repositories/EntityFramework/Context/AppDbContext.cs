@@ -2,7 +2,7 @@
 using ShopsRUs.Domain.Concrete;
 using System.Reflection;
 
-namespace ShopsRUs.Repository.Repositories.EntityFramework
+namespace ShopsRUs.Repository.Repositories.EntityFramework.Context
 {
     public class AppDbContext : DbContext
     {
@@ -21,7 +21,6 @@ namespace ShopsRUs.Repository.Repositories.EntityFramework
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
             base.OnModelCreating(modelBuilder);
         }

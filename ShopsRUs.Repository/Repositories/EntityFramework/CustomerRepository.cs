@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ShopsRUs.Core.Repository.EntityFramework;
 using ShopsRUs.Domain.Concrete;
+using ShopsRUs.Repository.Repositories.EntityFramework.Context;
 
 namespace ShopsRUs.Repository.Repositories.EntityFramework
 {

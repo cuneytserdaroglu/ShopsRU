@@ -1,5 +1,6 @@
 ﻿using ShopsRUs.Core.Repository.EntityFramework;
 using ShopsRUs.Core.UoW;
+using ShopsRUs.Repository.Repositories.EntityFramework.Context;
 using System;
 using System.Collections.Generic;
 using System.Linq;
